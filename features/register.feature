@@ -1,25 +1,53 @@
 Feature: Register Account functionality
 
-  @register
+#  @register
+#  Scenario: Register with mandatory fields
+#    Given I navigate to Register Page
+#    When I enter details into mandatory fields
+#    And I select Privacy Policy option
+#    And I click on Continue button
+#    Then Account should get created
+  @register #@runthisoneonly
   Scenario: Register with mandatory fields
     Given I navigate to Register Page
-    When I enter details into mandatory fields
+    When I enter below details into mandatory fields
+        |first_name|last_name|telephone|password|
+        |Aiswarya  |J        |123456789|12345   |
     And I select Privacy Policy option
     And I click on Continue button
     Then Account should get created
 
+#  @register
+#  Scenario: Register with all fields
+#    Given I navigate to Register Page
+#    When I enter details into all fields
+#    And I select Privacy Policy option
+#    And I click on Continue button
+#    Then Account should get created
   @register
   Scenario: Register with all fields
     Given I navigate to Register Page
-    When I enter details into all fields
+    When I enter below details into all fields
+        |first_name|last_name|telephone|password|
+        |Aiswarya  |J        |123456789|12345   |
     And I select Privacy Policy option
     And I click on Continue button
     Then Account should get created
 
+#  @register
+#  Scenario: Register with a duplicate email address
+#    Given I navigate to Register Page
+#    When I enter details into all fields except email field
+#    And I enter existing accounts email into email field
+#    And I select Privacy Policy option
+#    And I click on Continue button
+#    Then Proper warning message informing about duplicate account should be displayed
   @register
   Scenario: Register with a duplicate email address
     Given I navigate to Register Page
     When I enter details into all fields except email field
+        |first_name|last_name|telephone|password|
+        |Aiswarya  |J        |123456789|12345   |
     And I enter existing accounts email into email field
     And I select Privacy Policy option
     And I click on Continue button

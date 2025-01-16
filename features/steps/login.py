@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from features.pages.AccountPage import AccountPage
 from features.pages.HomePage import HomePage
 from features.pages.LoginPage import LoginPage
+from utilities import EmailWithTimeStampGenerator
 
 
 # def before_scenario(context):
@@ -32,11 +33,15 @@ def step_impl(context):
     # context.driver.find_element(By.LINK_TEXT, "Login").click()
 
 
-@when('I enter valid email address and valid password into the fields')
-def step_impl(context):
+# @when('I enter valid email address and valid password into the fields')
+@when('I enter valid email address as "{email}" and valid password as "{password}" into the fields')
+# def step_impl(context):
+def step_impl(context, email, password):
     # context.login_page = LoginPage(context.driver)
-    context.login_page.enter_email_address("amotooriapril2023@gmail.com")
-    context.login_page.enter_password("12345")
+    # context.login_page.enter_email_address("amotooriapril2023@gmail.com")
+    # context.login_page.enter_password("12345")
+    context.login_page.enter_email_address(email)
+    context.login_page.enter_password(password)
     # context.driver.find_element(By.ID, "input-email").send_keys("amotooriapril2023@gmail.com")
     # context.driver.find_element(By.ID, "input-password").send_keys("12345")
 
@@ -56,14 +61,29 @@ def step_impl(context):
     # context.driver.quit()
 
 
-@when('I enter invalid email and valid password into the fields')
-def step_impl(context):
+# @when('I enter invalid email and valid password into the fields')
+# def step_impl(context):
+#     # generate invalid email everytime
+#     time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+#     invalid_email = "amotoori" + time_stamp + "@gmail.com"
+#     # context.login_page = LoginPage(context.driver)
+#     context.login_page.enter_email_address(invalid_email)
+#     context.login_page.enter_password("12345")
+#     # context.driver.find_element(By.ID, "input-email").send_keys(invalid_email)
+#     # context.driver.find_element(By.ID, "input-password").send_keys("12345")
+
+# @when('I enter invalid email and valid password into the fields')
+# def step_impl(context):
+@when('I enter invalid email and valid password say "{password}" into the fields')
+def step_impl(context, password):
     # generate invalid email everytime
-    time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    invalid_email = "amotoori" + time_stamp + "@gmail.com"
+    # time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    # invalid_email = "amotoori" + time_stamp + "@gmail.com"
+    invalid_email = EmailWithTimeStampGenerator.get_new_email_with_timestamp()
     # context.login_page = LoginPage(context.driver)
     context.login_page.enter_email_address(invalid_email)
-    context.login_page.enter_password("12345")
+    # context.login_page.enter_password("12345")
+    context.login_page.enter_password(password)
     # context.driver.find_element(By.ID, "input-email").send_keys(invalid_email)
     # context.driver.find_element(By.ID, "input-password").send_keys("12345")
 
@@ -78,24 +98,44 @@ def step_impl(context):
     # context.driver.quit()
 
 
-@when('I enter valid email and invalid password into the fields')
-def step_impl(context):
+# @when('I enter valid email and invalid password into the fields')
+# def step_impl(context):
+#     # context.login_page = LoginPage(context.driver)
+#     context.login_page.enter_email_address("amotooriapril2023@gmail.com")
+#     context.login_page.enter_password("1234567")
+#     # context.driver.find_element(By.ID, "input-email").send_keys("amotooriapril2023@gmail.com")
+#     # context.driver.find_element(By.ID, "input-password").send_keys("1234567")
+
+@when('I enter valid email say "{email}" and invalid password say "{password}" into the fields')
+def step_impl(context, email, password):
     # context.login_page = LoginPage(context.driver)
-    context.login_page.enter_email_address("amotooriapril2023@gmail.com")
-    context.login_page.enter_password("1234567")
+    context.login_page.enter_email_address(email)
+    context.login_page.enter_password(password)
     # context.driver.find_element(By.ID, "input-email").send_keys("amotooriapril2023@gmail.com")
     # context.driver.find_element(By.ID, "input-password").send_keys("1234567")
 
 
-@when('I enter invalid email and invalid password into the fields')
-def step_impl(context):
-    time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    invalid_email = "amotoori" + time_stamp + "@gmail.com"
+# @when('I enter invalid email and invalid password into the fields')
+# def step_impl(context):
+#     time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+#     invalid_email = "amotoori" + time_stamp + "@gmail.com"
+#     # context.login_page = LoginPage(context.driver)
+#     context.login_page.enter_email_address(invalid_email)
+#     context.login_page.enter_password("1234567")
+#     # context.driver.find_element(By.ID, "input-email").send_keys(invalid_email)
+#     # context.driver.find_element(By.ID, "input-password").send_keys("1234567")
+
+@when('I enter invalid email and invalid password say "{password}" into the fields')
+def step_impl(context, password):
+    # time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    # invalid_email = "amotoori" + time_stamp + "@gmail.com"
+    invalid_email = EmailWithTimeStampGenerator.get_new_email_with_timestamp()
     # context.login_page = LoginPage(context.driver)
     context.login_page.enter_email_address(invalid_email)
-    context.login_page.enter_password("1234567")
+    context.login_page.enter_password(password)
     # context.driver.find_element(By.ID, "input-email").send_keys(invalid_email)
     # context.driver.find_element(By.ID, "input-password").send_keys("1234567")
+
 
 
 @when('I dont enter anything into email and password fields')

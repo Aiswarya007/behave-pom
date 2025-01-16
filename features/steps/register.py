@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from features.pages.AccountSuccessPage import AccountSuccessPage
 from features.pages.HomePage import HomePage
 from features.pages.RegistePage import RegisterPage
+from utilities import EmailWithTimeStampGenerator
 
 
 # def before_scenario(context):
@@ -31,23 +32,42 @@ def step_impl(context):
     context.register_page = context.home_page.select_register_option()
 
 
-@when('I enter details into mandatory fields')
+# @when('I enter details into mandatory fields')
+# def step_impl(context):
+#     # context.register_page = RegisterPage(context.driver)
+#     # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
+#     # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
+#     context.register_page.enter_first_name("Aiswarya")
+#     context.register_page.enter_last_name("J")
+#     time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+#     new_email = "amotoori" + time_stamp + "@gmail.com"
+#     # context.driver.find_element(By.ID, "input-email").send_keys(new_email)
+#     # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
+#     # context.driver.find_element(By.ID, "input-password").send_keys("12345")
+#     # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
+#     context.register_page.enter_email(new_email)
+#     context.register_page.enter_telephone("123456789")
+#     context.register_page.enter_password("12345")
+#     context.register_page.enter_password_confirm("12345")
+@when('I enter below details into mandatory fields')
 def step_impl(context):
-    # context.register_page = RegisterPage(context.driver)
-    # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
-    # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
-    context.register_page.enter_first_name("Aiswarya")
-    context.register_page.enter_last_name("J")
-    time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    new_email = "amotoori" + time_stamp + "@gmail.com"
-    # context.driver.find_element(By.ID, "input-email").send_keys(new_email)
-    # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
-    # context.driver.find_element(By.ID, "input-password").send_keys("12345")
-    # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
-    context.register_page.enter_email(new_email)
-    context.register_page.enter_telephone("123456789")
-    context.register_page.enter_password("12345")
-    context.register_page.enter_password_confirm("12345")
+    for row in context.table:
+        # context.register_page = RegisterPage(context.driver)
+        # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
+        # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
+        context.register_page.enter_first_name(row["first_name"])
+        context.register_page.enter_last_name(row["last_name"])
+        # time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+        # new_email = "amotoori" + time_stamp + "@gmail.com"
+        new_email = EmailWithTimeStampGenerator.get_new_email_with_timestamp()
+        # context.driver.find_element(By.ID, "input-email").send_keys(new_email)
+        # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
+        # context.driver.find_element(By.ID, "input-password").send_keys("12345")
+        # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
+        context.register_page.enter_email(new_email)
+        context.register_page.enter_telephone(row["telephone"])
+        context.register_page.enter_password(row["password"])
+        context.register_page.enter_password_confirm(row["password"])
 
 
 @when('I select Privacy Policy option')
@@ -73,44 +93,84 @@ def step_impl(context):
     # context.driver.quit()
 
 
-@when('I enter details into all fields')
+# @when('I enter details into all fields')
+# def step_impl(context):
+#     # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
+#     # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
+#     # time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+#     # new_email = "amotoori" + time_stamp + "@gmail.com"
+#     # context.driver.find_element(By.ID, "input-email").send_keys(new_email)
+#     # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
+#     # context.driver.find_element(By.ID, "input-password").send_keys("12345")
+#     # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
+#     # context.driver.find_element(By.XPATH, "//input[@name='newsletter'][@value='1']").click()
+#     # context.register_page = RegisterPage(context.driver)
+#     context.register_page.enter_first_name("Aiswarya")
+#     context.register_page.enter_last_name("J")
+#     time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+#     new_email = "amotoori" + time_stamp + "@gmail.com"
+#     context.register_page.enter_email(new_email)
+#     context.register_page.enter_telephone("123456789")
+#     context.register_page.enter_password("12345")
+#     context.register_page.enter_password_confirm("12345")
+#     context.register_page.select_yes_newsletter_option()
+
+@when('I enter below details into all fields')
 def step_impl(context):
-    # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
-    # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
-    # time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    # new_email = "amotoori" + time_stamp + "@gmail.com"
-    # context.driver.find_element(By.ID, "input-email").send_keys(new_email)
-    # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
-    # context.driver.find_element(By.ID, "input-password").send_keys("12345")
-    # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
-    # context.driver.find_element(By.XPATH, "//input[@name='newsletter'][@value='1']").click()
-    # context.register_page = RegisterPage(context.driver)
-    context.register_page.enter_first_name("Aiswarya")
-    context.register_page.enter_last_name("J")
-    time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    new_email = "amotoori" + time_stamp + "@gmail.com"
-    context.register_page.enter_email(new_email)
-    context.register_page.enter_telephone("123456789")
-    context.register_page.enter_password("12345")
-    context.register_page.enter_password_confirm("12345")
-    context.register_page.select_yes_newsletter_option()
+    for row in context.table:
+        # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
+        # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
+        # time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+        # new_email = "amotoori" + time_stamp + "@gmail.com"
+        # context.driver.find_element(By.ID, "input-email").send_keys(new_email)
+        # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
+        # context.driver.find_element(By.ID, "input-password").send_keys("12345")
+        # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
+        # context.driver.find_element(By.XPATH, "//input[@name='newsletter'][@value='1']").click()
+        # context.register_page = RegisterPage(context.driver)
+        context.register_page.enter_first_name(row["first_name"])
+        context.register_page.enter_last_name(row["last_name"])
+        # time_stamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+        # new_email = "amotoori" + time_stamp + "@gmail.com"
+        new_email = EmailWithTimeStampGenerator.get_new_email_with_timestamp()
+        context.register_page.enter_email(new_email)
+        context.register_page.enter_telephone(row["telephone"])
+        context.register_page.enter_password(row["password"])
+        context.register_page.enter_password_confirm(row["password"])
+        context.register_page.select_yes_newsletter_option()
 
 
+# @when('I enter details into all fields except email field')
+# def step_impl(context):
+#     # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
+#     # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
+#     # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
+#     # context.driver.find_element(By.ID, "input-password").send_keys("12345")
+#     # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
+#     # context.driver.find_element(By.XPATH, "//input[@name='newsletter'][@value='1']").click()
+#     # context.register_page = RegisterPage(context.driver)
+#     context.register_page.enter_first_name("Aiswarya")
+#     context.register_page.enter_last_name("J")
+#     context.register_page.enter_telephone("123456789")
+#     context.register_page.enter_password("12345")
+#     context.register_page.enter_password_confirm("12345")
+#     context.register_page.select_yes_newsletter_option()
 @when('I enter details into all fields except email field')
 def step_impl(context):
-    # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
-    # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
-    # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
-    # context.driver.find_element(By.ID, "input-password").send_keys("12345")
-    # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
-    # context.driver.find_element(By.XPATH, "//input[@name='newsletter'][@value='1']").click()
-    # context.register_page = RegisterPage(context.driver)
-    context.register_page.enter_first_name("Aiswarya")
-    context.register_page.enter_last_name("J")
-    context.register_page.enter_telephone("123456789")
-    context.register_page.enter_password("12345")
-    context.register_page.enter_password_confirm("12345")
-    context.register_page.select_yes_newsletter_option()
+    for row in context.table:
+        # context.driver.find_element(By.ID, "input-firstname").send_keys("Aiswarya")
+        # context.driver.find_element(By.ID, "input-lastname").send_keys("J")
+        # context.driver.find_element(By.ID, "input-telephone").send_keys("123456789")
+        # context.driver.find_element(By.ID, "input-password").send_keys("12345")
+        # context.driver.find_element(By.ID, "input-confirm").send_keys("12345")
+        # context.driver.find_element(By.XPATH, "//input[@name='newsletter'][@value='1']").click()
+        # context.register_page = RegisterPage(context.driver)
+        context.register_page.enter_first_name(row["first_name"])
+        context.register_page.enter_last_name(row["last_name"])
+        context.register_page.enter_telephone(row["telephone"])
+        context.register_page.enter_password(row["password"])
+        context.register_page.enter_password_confirm(row["password"])
+        context.register_page.select_yes_newsletter_option()
 
 
 @when('I enter existing accounts email into email field')

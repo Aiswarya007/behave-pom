@@ -30,9 +30,13 @@ def step_impl(context):
 
 
 
-@when('I enter valid product into the Search box field')
-def step_impl(context):
-    context.home_page.enter_product_into_search_box_field("HP")
+# @when('I enter valid product into the Search box field')
+# def step_impl(context):
+#     context.home_page.enter_product_into_search_box_field("HP")
+#     # context.driver.find_element(By.NAME, "search").send_keys("HP")
+@when('I enter valid product say "{product}" into the Search box field')
+def step_impl(context, product):
+    context.home_page.enter_product_into_search_box_field(product)
     # context.driver.find_element(By.NAME, "search").send_keys("HP")
 
 
@@ -48,7 +52,8 @@ def step_impl(context):
     # expected_text = "There is no product that matches the search criteria."
     # search_page = SearchPage(context.driver)
     # assert search_page.display_status_of_message(expected_text)
-    assert context.search_page.display_status_of_message("There is no product that matches the search criteria.")
+    # assert context.search_page.display_status_of_message("There is no product that matches the search criteria.")
+    assert context.search_page.display_status_of_message("There is no product that matches the search criteria.abc")
     # assert context.driver.find_element(By.XPATH, "//input[@id='button-search']/following-sibling::p").text.__eq__(
     #     expected_text)
     # context.driver.quit()
@@ -69,7 +74,12 @@ def step_impl(context):
     # context.driver.quit()
 
 
-@when('I enter invalid product into the Search box field')
-def step_impl(context):
-    context.home_page.enter_product_into_search_box_field("Honda")
+# @when('I enter invalid product into the Search box field')
+# def step_impl(context):
+#     context.home_page.enter_product_into_search_box_field("Honda")
+#     # context.driver.find_element(By.NAME, "search").send_keys("Honda")
+
+@when('I enter invalid product say "{product}" into the Search box field')
+def step_impl(context, product):
+    context.home_page.enter_product_into_search_box_field(product)
     # context.driver.find_element(By.NAME, "search").send_keys("Honda")
